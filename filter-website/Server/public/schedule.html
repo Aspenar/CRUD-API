@@ -129,9 +129,11 @@
                 "<table>" +
                 "<thead>" +
                 "<tr>" +
-                '<th width="33%">Major</th>' +
-                '<th width="33%">Number</th>' +
-                '<th width="33%">Instructor</th>' +
+                '<th>Card</th>' +
+                '<th>Color</th>' +
+                '<th>Type</th>' +
+                '<th>Year/Set</th>' +
+                '<th>Converted Mana Cost</th>' +
                 "</tr>" +
                 "</thead>" +
                 "<tbody>";
@@ -140,13 +142,19 @@
                   displayTable +=
                     "<tr>" +
                     "<td>" +
-                    row.major +
+                    row.card_name +
                     "</td>" +
                     "<td>" +
-                    row.number +
+                    row.color_name +
                     "</td>" +
                     "<td>" +
-                    row.professor +
+                    row.type_name +
+                    "</td>" +
+                    "<td>" +
+                    `${row.year}/${row.set_name}` +
+                    "</td>" +
+                    "<td>" +
+                    row.cmc +
                     "</td>" +
                     "</tr>";
                 }
