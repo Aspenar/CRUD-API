@@ -20,6 +20,24 @@ async function getCardsWithParams(parameters = {}) {
     queryParameters.push("%" + colorId + "%");
   }
 
+  if (parameters.type_id) {
+    const typeId = parameters.type_id;
+    whereStatements.push(`type_id = ${typeId}`);
+    queryParameters.push("%" + typeId + "%");
+  }
+
+  if (parameters.year) {
+    const year = parameters.year;
+    whereStatements.push(`year = ${year}`);
+    queryParameters.push("%" + year + "%");
+  }
+
+  if (parameters.card_name) {
+    const cardName = parameters.card_name;
+    whereStatements.push(`card_name LIKE '%${cardName}%'`);
+    queryParameters.push("%" + cardName + "%");
+  }
+
   if (typeof parameters.level !== "undefined" && parseInt(parameters.level) !== 0) {
     const classLevel = parseInt(parameters.level);
     whereStatements.push("c.number BETWEEN ? AND ?");
