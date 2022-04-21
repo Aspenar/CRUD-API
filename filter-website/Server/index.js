@@ -1,7 +1,7 @@
 //Libraries
 const express = require("express");
 const multer = require("multer");
-const course = require('./Model/course');
+const card = require('./Model/card');
 const mysql = require('mysql');
 
 //Setup defaults for script
@@ -24,7 +24,7 @@ upload.none(),
 async (request, response) => {
   let result = {}
   try {
-    result = await course.getAllCourses(request.query);
+    result = await card.getCardsWithParams(request.query);
   } catch (error) {
     return response
     .status(500) //Error code when something goes wrong with the server

@@ -60,5 +60,5 @@ async function getCardsWithParams(parameters = {}) {
 }
 
 module.exports = {
-    getAllCourses
+    getCardsWithParams
 }
