@@ -45,12 +45,12 @@ async function getCardsWithParams(parameters = {}) {
     queryParameters.push(classLevel + 99);
   }
 
-  if (typeof parameters.sort !== "undefined") {
+  if (parameters.sort) {
     const sort = parameters.sort;
     if (sort === "ASC") {
-      orderByStatements.push("c.number ASC");
+      orderByStatements.push("c.cmc ASC");
     } else if (sort === "DESC") {
-      orderByStatements.push("c.number DESC");
+      orderByStatements.push("c.cmc DESC");
     }
   }
 
@@ -66,7 +66,7 @@ async function getCardsWithParams(parameters = {}) {
 
   //Dynamically add ORDER BY expressions to SELECT statements if needed
   if (
-    typeof parameters.limit !== "undefined" &&
+    parameters.limit &&
     parameters.limit > 0 &&
     parameters.limit < 6
   ) {
