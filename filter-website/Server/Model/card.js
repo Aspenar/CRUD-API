@@ -2,11 +2,12 @@ const connection = require("./connection");
 //Part of the Model in MVC (model view controller) the view is a JSON.
 async function getCardsWithParams(parameters = {}) {
   let selectSql = `SELECT 
-                            c, 
-                        FROM card c
-                        INNER JOIN color o ON c.color_id = o.id
-                        INNER JOIN type t ON c.type_id = t.id
-                        INNER JOIN set s ON c.set_id = s.id`;
+  * 
+  FROM card AS c
+  INNER JOIN color o ON c.color_id = o.id
+  INNER JOIN type t ON c.type_id = t.id
+  INNER JOIN year y ON c.year_id = y.id`;
+
     let whereStatements = [];
     let orderByStatements = [];
     let queryParameters = [];
