@@ -8,18 +8,16 @@ async function getCardsWithParams(parameters = {}) {
   INNER JOIN type t ON c.type_id = t.id
   INNER JOIN year y ON c.year_id = y.id`;
 
-    let whereStatements = [];
-    let orderByStatements = [];
-    let queryParameters = [];
+  let whereStatements = [];
+  let orderByStatements = [];
+  let queryParameters = [];
 
-  if (typeof parameters.gimm !== "undefined" && parseInt(parameters.gimm) === 0) {
-    whereStatements.push("m.abbreviation != 'GIMM'");
-  }
+  console.log(parameters);
 
-  if (typeof parameters.instructor !== "undefined" && parameters.instructor.length > 0) {
-    const instructor = parameters.instructor;
-    whereStatements.push("CONCAT(f.first_name, ' ', f.last_name) LIKE ?");
-    queryParameters.push("%" + instructor + "%");
+  if (parameters.color_id) {
+    const colorId = parameters.color_id;
+    whereStatements.push(`color_id = ${colorId}`);
+    queryParameters.push("%" + colorId + "%");
   }
 
   if (typeof parameters.level !== "undefined" && parseInt(parameters.level) !== 0) {

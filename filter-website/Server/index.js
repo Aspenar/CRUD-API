@@ -18,7 +18,6 @@ app.get(
 upload.none(), 
 async (request, response) => {
   let result = {}
-  console.log ('test');
   try {
     result = await card.getCardsWithParams(request.query);
   } catch (error) {
