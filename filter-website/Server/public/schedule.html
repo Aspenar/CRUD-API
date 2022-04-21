@@ -95,7 +95,7 @@
 
     <hr />
 
-    <div id="classes" class="overflow">Courses go here.</div>
+    <div id="cards" class="overflow">Courses go here.</div>
 
     <script>
       const isEmpty = (obj) => Object.keys(obj).length === 0;
@@ -103,16 +103,23 @@
       document.getElementById("search").addEventListener("click", (event) => {
         const getParameters = {};
 
-        if (document.querySelector("#gimm:checked")) {
-          formData.append("gimm", 0);
-        }
         const elemIds = ['type_id', 'color_id', 'year', 'card_name'];
 
         for (let id of elemIds) {
           if (document.getElementById(id).value.length !== 0) {
-            formData.append(id, document.getElementById(id).value);
+            getParameters[id] = document.getElementById(id).value;
           }
         }
+        console.log(getParameters);
+        let queryString = "";
+
+        for(const key in getParameters){
+          queryString += `${key}=${getParameters[key]}&`
+        }
+
+        queryString = queryString.slice(0,-1);
+
+        console.log(queryString);
 
         //Settings for FETCH API request
         let fetchSettings = {
@@ -120,7 +127,7 @@
         };
 
         //Send FETCH API request
-        fetch("http://localhost/card/", fetchSettings)
+        fetch(`http://localhost/card/${queryString.length ? '?' + queryString : ""}`, fetchSettings)
           .then((response) => {
             return new Promise((resolve) =>
               response.json().then((json) =>
@@ -169,7 +176,7 @@
                 }
               }
               displayTable += "</tbody></table>";
-              document.getElementById("classes").innerHTML = displayTable;
+              document.getElementById("cards").innerHTML = displayTable;
             }
           })
           .catch((error) => {

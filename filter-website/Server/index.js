@@ -11,12 +11,6 @@ app.use(express.static('public'));
 app.use(cors());
 const upload = multer();
 const port = 80; //Default port to http server
-const connection = mysql.createConnection({
-  host: "bsu-gimm260-fall-2021.cwtgn0g8zxfm.us-west-2.rds.amazonaws.com",
-  user: "in_class_activity",
-  password: "in_class_activity",
-  database: "in_class_activity",
-});
 // this is the conntroller in MVC!
 //The * in app.* needs to match the method type of the request
 app.get(
