@@ -6,16 +6,71 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-      <h1>Add a New Card to my Collection</h1>
+    <h1>Add a New Card to my Collection</h1>
     <hr />
-      <div class="row">
-          <div class="col-2">
-                <label for="card_name">Card Name</label>
-                <input type="text" id="card_name" name="card_name">
-                <div class="row">
-                  <div id='card_name-error' class='col-6 error-message'>&nbsp;</div>
-                  </div>
-            </div>
-          </div>
+    <div class="row">
+      <div class="col-2">
+        <label for="card_name">Card Name</label>
+        <input type="text" id="card_name" name="card_name" />
       </div>
+    </div>
+    <div class="row">
+      <div id="card_name-error" class="col-6 error-message">&nbsp;</div>
+    </div>
+    
+    <div class="row">
+      <div class="col-2">
+        <lable for="color">Color</lable>
+        <select id="color_id" name="color_id">
+          <option value="1">White</option>
+          <option value="2">Blue</option>
+          <option value="3">Black</option>
+          <option value="4">Red</option>
+          <option value="5">Green</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div id="color-error" class="col-6 error-message">&nbsp;</div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <lable for="type_id">Type</lable>
+        <select id="type_id" name="type_id">
+          <option value="1">Creature</option>
+          <option value="2">Enchantment</option>
+          <option value="3">Instant</option>
+          <option value="4">Artifact</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div id="type-error" class="col-6 error-message">&nbsp;</div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <lable for="year_id">Set</lable>
+        <select id="year_id" name="year_id">
+          <option value="1">Zendikar Rising</option>
+          <option value="2">Kaldheim</option>
+          <option value="3">Neon Dynasty</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div id='year-error' class='col-6 error-message'>&nbsp;</div>
+      </div>
+
+      <div class="row">
+        <div class="col-2">
+          <lable for="cmc">Converted Mana Cost</lable>
+          <input id="cmc" type="number"/>
+        </div>
+      </div>
+      <div class="row">
+        <div id='cmc-error' class='col-6 error-message'>&nbsp;</div>
+        </div>
   </body>
+</html>
