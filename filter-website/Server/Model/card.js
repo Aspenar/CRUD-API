@@ -1,16 +1,15 @@
 const connection = require("./connection");
 //Part of the Model in MVC (model view controller) the view is a JSON.
-async function getAllCourses(parameters = {}) {
+async function getCardsWithParams(parameters = {}) {
   let selectSql = `SELECT 
-                            m.abbreviation AS major, 
-                            c.number,
-                            CONCAT(f.first_name, ' ', f.last_name) AS professor 
-                        FROM classes c
-                        INNER JOIN majors m ON c.major_id = m.id
-                        INNER JOIN faculty f ON c.faculty_id = f.id`,
-    whereStatements = [],
-    orderByStatements = [],
-    queryParameters = [];
+                            c, 
+                        FROM card c
+                        INNER JOIN color o ON c.color_id = o.id
+                        INNER JOIN type t ON c.type_id = t.id
+                        INNER JOIN set s ON c.set_id = s.id`;
+    let whereStatements = [];
+    let orderByStatements = [];
+    let queryParameters = [];
 
   if (typeof parameters.gimm !== "undefined" && parseInt(parameters.gimm) === 0) {
     whereStatements.push("m.abbreviation != 'GIMM'");
