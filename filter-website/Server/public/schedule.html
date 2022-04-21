@@ -15,34 +15,48 @@
         <label>Color</label>
       </div>
       <div class="col-10">
-        <select id="color">
+        <select id="color_id">
           <option value=""></option>
-          <option value="White">White</option>
-          <option value="Blue">Blue</option>
-          <option value="Black">Black</option>
-          <option value="Red">Red</option>
-          <option value="Green">Green</option>
+          <option value="1">White</option>
+          <option value="2">Blue</option>
+          <option value="3">Black</option>
+          <option value="4">Red</option>
+          <option value="5">Green</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <label>Type</label>
+      </div>
+      <div class="col-10">
+        <select id="type_id">
+          <option value=""></option>
+          <option value="1">Creature</option>
+          <option value="2">Enchantment</option>
+          <option value="3">Instant</option>
         </select>
       </div>
     </div>
 
     <div class="row">
       <div class="col-2">
-        <label>Course Instructor</label>
+        <label>Year</label>
       </div>
       <div class="col-10">
-        <input id="instructor" type="text" />
+        <input id="year" type="number"/>
       </div>
     </div>
 
     <div class="row">
       <div class="col-2">
-        <label>Exclude GIMM Courses?</label>
+        <label>Card Name</label>
       </div>
       <div class="col-10">
-        <input id="gimm" type="checkbox" />
+        <input id="card_name" type="text" />
       </div>
     </div>
+
 
     <div class="row">
       <div class="col-2">
@@ -92,7 +106,7 @@
         if (document.querySelector("#gimm:checked")) {
           formData.append("gimm", 0);
         }
-        const elemIds = ['instructor', 'color', 'sort', 'limit'];
+        const elemIds = ['type_id', 'color_id', 'year', 'card_name'];
 
         for (let id of elemIds) {
           if (document.getElementById(id).value.length !== 0) {
