@@ -92,17 +92,12 @@
         if (document.querySelector("#gimm:checked")) {
           formData.append("gimm", 0);
         }
-        if (document.getElementById("instructor").value.length !== 0) {
-          formData.append("instructor", document.getElementById("instructor").value);
-        }
-        if (document.getElementById("color").value.length !== 0) {
-          formData.append("color", document.getElementById("color").value);
-        }
-        if (document.getElementById("sort").value.length !== 0) {
-          formData.append("sort", document.getElementById("sort").value);
-        }
-        if (document.getElementById("limit").value.length !== 0) {
-          formData.append("limit", document.getElementById("limit").value);
+        const elemIds = ['instructor', 'color', 'sort', 'limit'];
+
+        for (let id of elemIds) {
+          if (document.getElementById(id).value.length !== 0) {
+            formData.append(id, document.getElementById(id).value);
+          }
         }
 
         //Settings for FETCH API request
