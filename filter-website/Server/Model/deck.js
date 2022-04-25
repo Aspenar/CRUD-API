@@ -1,8 +1,7 @@
 const connection = require("./connection");
-async function viewCards(parameters = {}) {
+async function viewCards() {
     let viewSql = `SELECT * FROM card`
-    console.log(parameters); 
-    return await connection.query(viewSql, parameters);
+    return await connection.query(viewSql);
 }
 module.exports = {
     viewCards

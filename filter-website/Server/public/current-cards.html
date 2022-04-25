@@ -6,16 +6,31 @@
         <link rel='stylesheet' href='style.css'>
     </head>
     <body>
-        <h1>Survey Responses</h1>
-        <div id="responseLinks">
-
+        <div class="row">
+            <div class="col-12">
+                <h1>Current Cards in the Collection</h1>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-2">
+                <a href="collection.html">View Cards in Collection</a>
+            </div>
+            <div class="col-2">
+            <a href="insert.html">Add a New Card</a>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-2">
+        <div id="responseLinks"></div>
+        </div>
         </div>
     </body>
     <script>
         const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             console.log(urlParams.get('id'));
-         fetch("http://localhost/current-cards/", {method: 'GET'})
+         fetch("http://localhost/deck/", {method: 'GET'})
                     .then((response) => {
                         return new Promise((resolve) => response.json()
                             .then((json) => resolve({
@@ -30,7 +45,7 @@
                         for(row of json.data){
                             
                             document.getElementById("responseLinks").innerHTML +=
-                                "<a href='edit.html?id=" + row.id + "' >Survey Response</a><br><br>"
+                                "<a href='edit.html?id=" + row.id + "' >card in collection</a><br><br>"
                             
 
                         }

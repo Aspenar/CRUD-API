@@ -6,16 +6,20 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Add a New Card to my Collection</h1>
-    <hr />
     <div class="row">
-      <div class="col-2">
-        <a href="collection.html">View Cards in Collection</a>
-      </div>
-      <div class="col-2">
-        <a href="insert.html">Add a New Card</a>
-      </div>
+        <div class="col-12">
+    <h1>Add a New Card to my Collection</h1>
     </div>
+</div>
+    <div class="row">
+        <div class="col-2">
+          <a href="collection.html">View Cards in Collection</a>
+        </div>
+        <div class="col-2">
+          <a href="insert.html">Add a New Card</a>
+        </div>
+      </div>
+    <hr />
     <div class="row">
       <div class="col-2">
         <label for="card_name">Card Name</label>
@@ -85,15 +89,49 @@
     </div>
     <div class="row">
       <div class="col-2">
-        <button id="submit">Submit</button>
+        <button id="Update">Update</button>
       </div>
     </div>
+
+    //Send FETCH API request
     <script>
-      const isEmpty = (obj) => object.keys(obj).length === 0;
+      const isEmpty = (obj) => Object.keys(obj).length === 0;
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      console.log(urlParams.get("id"));
 
-      document.getElementById("submit").addEventListener("click", (event) => {
+      fetch("http://localhost/deck/", { method: "GET" })
+        .then((response) => {
+          return new Promise((resolve) =>
+            response.json().then((json) =>
+              resolve({
+                status: response.status,
+                json,
+              })
+            )
+          );
+        })
+        .then(({ status, json }) => {
+          if (200 === status) {
+            console.log(json);
+            let data = json.data[urlParams.get("id") - 1];
+
+            document.getElementById("type_id").value = data.type_id;
+            document.getElementById("year_id").value = data.year_id;
+            document.getElementById("color_id").value = data.color_id;
+            document.getElementById("cmc").value = data.cmc;
+            document.getElementById("card_name").value = data.card_name;
+
+            console.log(data);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      console.log("here");
+
+      document.getElementById("Update").addEventListener("click", (event) => {
         const formData = new FormData();
-
         if (document.getElementById("type_id").value.length !== 0) {
           formData.append("type_id", document.getElementById("type_id").value);
         }
@@ -109,14 +147,16 @@
         if (document.getElementById("card_name").value.length !== 0) {
           formData.append("card_name", document.getElementById("card_name").value);
         }
+
+        formData.append("id", urlParams.get("id"));
         //Settings for FETCH API request
         let fetchSettings = {
-          method: "POST",
+          method: "PUT",
           body: formData,
         };
 
         //Send FETCH API request
-        fetch("http://localhost/pack/", fetchSettings)
+        fetch("http://localhost/sideboard", fetchSettings)
           .then((response) => {
             return new Promise((resolve) =>
               response.json().then((json) =>
