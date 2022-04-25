@@ -58,6 +58,7 @@ app.post(
       try {
          await pack.postNewCard(request.body);
       } catch (error) {
+        console.log(error);
           return response
               .status(500) //Error code when something goes wrong with the server
               .json({ message: 'Something went wrong with the server.' });
