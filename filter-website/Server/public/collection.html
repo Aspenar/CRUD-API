@@ -13,6 +13,9 @@
       <div class="col-2">
         <a href="insert.html">Add a New Card</a>
       </div>
+      <div class="col-2">
+        <a href="update.html">Change a Card's Details</a>
+      </div>
     </div>
 
     <div class="row">
@@ -49,7 +52,7 @@
         <label>Year</label>
       </div>
       <div class="col-10">
-        <input id="year" type="number"/>
+        <input id="year" type="number" />
       </div>
     </div>
 
@@ -61,7 +64,6 @@
         <input id="card_name" type="text" />
       </div>
     </div>
-
 
     <div class="row">
       <div class="col-2">
@@ -94,7 +96,7 @@
 
     <div class="row">
       <div class="col-12">
-        <button id="search">Search for Classes</button>
+        <button id="search">Search for Cards</button>
       </div>
     </div>
 
@@ -108,7 +110,7 @@
       document.getElementById("search").addEventListener("click", (event) => {
         const getParameters = {};
 
-        const elemIds = ['type_id', 'color_id', 'year', 'card_name', 'sort', 'limit'];
+        const elemIds = ["type_id", "color_id", "year", "card_name", "sort", "limit"];
 
         for (let id of elemIds) {
           if (document.getElementById(id).value.length !== 0) {
@@ -118,21 +120,21 @@
         console.log(getParameters);
         let queryString = "";
 
-        for(const key in getParameters){
-          queryString += `${key}=${getParameters[key]}&`
+        for (const key in getParameters) {
+          queryString += `${key}=${getParameters[key]}&`;
         }
 
-        queryString = queryString.slice(0,-1);
+        queryString = queryString.slice(0, -1);
 
         console.log(queryString);
 
         //Settings for FETCH API request
         let fetchSettings = {
-          method: 'GET',
+          method: "GET",
         };
 
         //Send FETCH API request
-        fetch(`http://localhost/card/${queryString.length ? '?' + queryString : ""}`, fetchSettings)
+        fetch(`http://localhost/card/${queryString.length ? "?" + queryString : ""}`, fetchSettings)
           .then((response) => {
             return new Promise((resolve) =>
               response.json().then((json) =>
@@ -150,11 +152,11 @@
                 "<table>" +
                 "<thead>" +
                 "<tr>" +
-                '<th>Card</th>' +
-                '<th>Color</th>' +
-                '<th>Type</th>' +
-                '<th>Year/Set</th>' +
-                '<th>Converted Mana Cost</th>' +
+                "<th>Card</th>" +
+                "<th>Color</th>" +
+                "<th>Type</th>" +
+                "<th>Year/Set</th>" +
+                "<th>Converted Mana Cost</th>" +
                 "</tr>" +
                 "</thead>" +
                 "<tbody>";
