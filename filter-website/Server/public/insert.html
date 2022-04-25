@@ -22,6 +22,7 @@
       <div class="col-2">
         <lable for="color">Color</lable>
         <select id="color_id" name="color_id">
+          <option value="0"></option>
           <option value="1">White</option>
           <option value="2">Blue</option>
           <option value="3">Black</option>
@@ -38,6 +39,7 @@
       <div class="col-2">
         <lable for="type_id">Type</lable>
         <select id="type_id" name="type_id">
+          <option value="0"></option>
           <option value="1">Creature</option>
           <option value="2">Enchantment</option>
           <option value="3">Instant</option>
@@ -53,6 +55,7 @@
       <div class="col-2">
         <lable for="year_id">Set</lable>
         <select id="year_id" name="year_id">
+          <option value="0"></option>
           <option value="1">Zendikar Rising</option>
           <option value="2">Kaldheim</option>
           <option value="3">Neon Dynasty</option>
@@ -60,17 +63,69 @@
       </div>
     </div>
     <div class="row">
-      <div id='year-error' class='col-6 error-message'>&nbsp;</div>
-      </div>
+      <div id="year-error" class="col-6 error-message">&nbsp;</div>
+    </div>
 
-      <div class="row">
-        <div class="col-2">
-          <lable for="cmc">Converted Mana Cost</lable>
-          <input id="cmc" type="number" name="cmc" min="1" max="10"/>
-        </div>
+    <div class="row">
+      <div class="col-2">
+        <lable for="cmc">Converted Mana Cost</lable>
+        <input id="cmc" type="number" name="cmc" min="1" max="10" />
       </div>
-      <div class="row">
-        <div id='cmc-error' class='col-6 error-message'>&nbsp;</div>
-        </div>
+    </div>
+    <div class="row">
+      <div id="cmc-error" class="col-6 error-message">&nbsp;</div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <button id="submit">Submit</button>
+      </div>
+    </div>
+    <script>
+        const isEmpty = (obj) => object.keys(obj).length === 0;
+
+      document.getElementById('submit').addEventListener('click', (event) => {
+        const formData = new FormData();
+
+        if (document.getElementById('type_id').value.length !== 0) {
+          formData.append('type_id', document.getElementById('type_id').value);
+        }
+        if (document.getElementById('year_id').value.length !==0) {
+          formData.append('year_id', document.getElementById('year_id').value);
+        }
+        if (document.getElementById('color_id').value.length !==0) {
+          formData.append('color_id', document.getElementById('color_id').value);
+        }
+        if (document.getElementById('cmc').value !== 0) {
+                    formData.append('cmc', document.getElementById('cmc').value);
+                }
+        if (document.getElementById('card_name').value.length !== 0) {
+                    formData.append('card_name', document.getElementById('card_name').value);
+                }
+                       //Settings for FETCH API request
+                       let fetchSettings = {
+                    method: 'POST',
+                    body: formData
+                };
+
+                //Send FETCH API request
+                fetch("http://localhost/pack/", fetchSettings)
+                    .then((response) => {
+                        return new Promise((resolve) => response.json()
+                            .then((json) => resolve({
+                                status: response.status,
+                                json,
+                            })
+                            ));
+                    })
+                    //Logic to display errors on form
+                    .then(({ status, json }) => {
+
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                return;
+            });
+    </script>
   </body>
 </html>
