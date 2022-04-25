@@ -4,6 +4,7 @@ const multer = require("multer");
 const card = require('./Model/card');
 const pack = require('./Model/pack');
 const deck = require('./Model/deck');
+const sideboard = require('./Model/sideboard');
 const mysql = require('mysql');
 const cors = require('cors');
 const { check, validationResult } = require('express-validator');
@@ -68,6 +69,23 @@ app.post(
           response
               .status(200)
               .json({ message: 'Ok' });
+});
+app.get(
+  '/deck/',
+
+upload.none(), 
+async (request, response) => {
+  let result = {}
+  try {
+    result = await deck.viewCards(request.query);
+  } catch (error) {
+    console.log(error);
+    return response
+    .status(500) //Error code when something goes wrong with the server
+    .json({ message: "Something went wrong with the server." });
+  }
+
+  return response.json({data:result});
 });
 
 

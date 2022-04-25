@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>            
+        <title>GIMM 340 Book Survey</title>
+        <link rel='stylesheet' href='style.css'>
+    </head>
+    <body>
+        <h1>Survey Responses</h1>
+        <div id="responseLinks">
+
+        </div>
+    </body>
+    <script>
+        const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            console.log(urlParams.get('id'));
+         fetch("http://localhost/current-cards/", {method: 'GET'})
+                    .then((response) => {
+                        return new Promise((resolve) => response.json()
+                            .then((json) => resolve({
+                                status: response.status,
+                                json,
+                            })
+                        ));
+                    })
+                    .then(({status, json}) => {
+                        if (200 === status) {
+                            console.log (json);
+                        for(row of json.data){
+                            
+                            document.getElementById("responseLinks").innerHTML +=
+                                "<a href='edit.html?id=" + row.id + "' >Survey Response</a><br><br>"
+                            
+
+                        }
+
+                        
+
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                    console.log('here');
+    </script>
