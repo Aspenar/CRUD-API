@@ -2,9 +2,7 @@
 const express = require("express");
 const multer = require("multer");
 const card = require("./Model/card");
-const pack = require("./Model/pack");
-const deck = require("./Model/deck");
-const sideboard = require("./Model/sideboard");
+//const pack = require("./Model/pack");
 const mysql = require("mysql");
 const cors = require("cors");
 const { check, validationResult } = require("express-validator");
@@ -31,7 +29,7 @@ app.get("/card/", upload.none(), async (request, response) => {
   return response.json({ data: result });
 });
 app.post(
-  "/pack/",
+  "/card/",
 
   upload.none(),
   check("type_id", "Choose a card type").isIn(["1", "2", "3", "4"]),
@@ -52,7 +50,7 @@ app.post(
       });
     }
     try {
-      await pack.postNewCard(request.body);
+      await card.postNewCard(request.body);
     } catch (error) {
       console.log(error);
       return response
@@ -64,13 +62,13 @@ app.post(
   }
 );
 app.get(
-  "/deck/",
+  "/card/",
 
   upload.none(),
   async (request, response) => {
     let result = {};
     try {
-      result = await deck.viewCards(request.query);
+      result = await card.viewCards(request.query);
     } catch (error) {
       console.log(error);
       return response
@@ -82,7 +80,7 @@ app.get(
   }
 );
 app.put(
-  "/sideboard/:id/",
+  "/card/:id/",
 
   upload.none(),
   check("type_id", "Choose a card type").isIn(["1", "2", "3", "4"]),
@@ -103,7 +101,7 @@ app.put(
       });
     }
     try {
-      await sideboard.updateACard(request.body);
+      await card.updateACard(request.body);
     } catch (error) {
       console.log(error);
       return response

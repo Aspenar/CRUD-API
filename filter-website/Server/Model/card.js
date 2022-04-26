@@ -65,17 +65,38 @@ async function getCardsWithParams(parameters = {}) {
   }
 
   //Dynamically add ORDER BY expressions to SELECT statements if needed
-  if (
-    parameters.limit &&
-    parameters.limit > 0 &&
-    parameters.limit < 6
-  ) {
+  if (parameters.limit && parameters.limit > 0 && parameters.limit < 6) {
     selectSql = selectSql + " LIMIT " + parameters.limit;
   }
 
   return connection.query(selectSql, queryParameters);
 }
+async function viewCards() {
+  let viewSql = `SELECT * FROM card WHERE id = ?`;
+  return await connection.query(viewSql);
+}
+async function updateACard(parameters = {}) {
+  let updateSql = `Update card 
+  SET card_name = ?,
+  color_id = ?,
+  type_id = ?,
+  year_id = ?,
+  cmc = ?
+  WHERE id = ?`
+  console.log(parameters);
+  let queryParameters = [parameters.card_name, parameters.color_id, parameters.type_id, parameters.year_id, parameters.cmc, parameters.id];
+  return await connection.query(updateSql, queryParameters);
+}
+async function postNewCard(parameters = {}) {
+  let insertSql = `INSERT INTO card (card_name, color_id, type_id, year_id, cmc) VALUES (?,?,?,?,?)`
+  console.log(parameters);
+  let queryParameters = [parameters.card_name, parameters.color_id, parameters.type_id, parameters.year_id, parameters.cmc];
+  return await connection.query(insertSql, queryParameters);
+}
 
 module.exports = {
-    getCardsWithParams
-}
+  getCardsWithParams,
+  viewCards,
+  updateACard,
+  postNewCard
+};

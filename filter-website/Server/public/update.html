@@ -100,7 +100,7 @@
       const urlParams = new URLSearchParams(queryString);
       console.log(urlParams.get("id"));
 
-      fetch("http://localhost/deck/", { method: "GET" })
+      fetch("http://localhost/card/", { method: "GET" })
         .then((response) => {
           return new Promise((resolve) =>
             response.json().then((json) =>
@@ -156,7 +156,7 @@
         };
 
         //Send FETCH API request
-        fetch("http://localhost/sideboard/:id/", fetchSettings)
+        fetch("http://localhost/card/:id/", fetchSettings)
           .then((response) => {
             return new Promise((resolve) =>
               response.json().then((json) =>
