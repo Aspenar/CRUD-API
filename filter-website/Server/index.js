@@ -2,7 +2,6 @@
 const express = require("express");
 const multer = require("multer");
 const card = require("./Model/card");
-//const pack = require("./Model/pack");
 const mysql = require("mysql");
 const cors = require("cors");
 const { check, validationResult } = require("express-validator");
