@@ -31,7 +31,7 @@ app.get("/card/", upload.none(), async (request, response) => {
   return response.json({ data: result });
 });
 app.post(
-  "/card/",
+  "/pack/",
 
   upload.none(),
   check("type_id", "Choose a card type").isIn(["1", "2", "3", "4"]),
@@ -64,7 +64,7 @@ app.post(
   }
 );
 app.get(
-  "/card/",
+  "/deck/",
 
   upload.none(),
   async (request, response) => {
@@ -82,7 +82,7 @@ app.get(
   }
 );
 app.post(
-  "/card/",
+  "/sideboard/",
 
   upload.none(),
   check("type_id", "Choose a card type").isIn(["1", "2", "3", "4"]),
