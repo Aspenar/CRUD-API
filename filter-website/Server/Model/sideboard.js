@@ -8,20 +8,9 @@ async function updateACard(parameters = {}) {
     cmc = ?
     WHERE id = ?`
     console.log(parameters);
-    let queryParameters = [request.body.card_name, request.body.color_id, request.body.type_id, request.body.year_id, request.body.cmc, request.params.id];
+    let queryParameters = [parameters.card_name, parameters.color_id, parameters.type_id, parameters.year_id, parameters.cmc, parameters.id];
     return await connection.query(updateSql, queryParameters);
 }
 module.exports = {
     updateACard
 }
-// // const updateSql = `UPDATE DS_Magic
-// SET type_id = ?,
-// spell = ?, 
-// Cool_Factor = ?, 
-// uses = ?
-// WHERE id = ?`
-// let queryParameters = [request.body.type_id,
-// request.body.spell,
-// request.body.Cool_Factor,
-// request.body.uses,
-// request.params.id];

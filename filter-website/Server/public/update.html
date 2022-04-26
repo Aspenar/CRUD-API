@@ -156,7 +156,7 @@
         };
 
         //Send FETCH API request
-        fetch("http://localhost/sideboard", fetchSettings)
+        fetch("http://localhost/sideboard/:id/", fetchSettings)
           .then((response) => {
             return new Promise((resolve) =>
               response.json().then((json) =>
@@ -171,6 +171,7 @@
           .then(({ status, json }) => {})
           .catch((error) => {
             console.error("Error:", error);
+            console.log(error);
           });
         return;
       });

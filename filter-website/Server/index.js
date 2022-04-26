@@ -81,8 +81,8 @@ app.get(
     return response.json({ data: result });
   }
 );
-app.post(
-  "/sideboard/",
+app.put(
+  "/sideboard/:id/",
 
   upload.none(),
   check("type_id", "Choose a card type").isIn(["1", "2", "3", "4"]),
