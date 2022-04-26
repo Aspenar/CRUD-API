@@ -31,7 +31,7 @@ app.get("/card/", upload.none(), async (request, response) => {
   return response.json({ data: result });
 });
 app.post(
-  "/pack/",
+  "/card/",
 
   upload.none(),
   check("type_id", "Choose a card type").isIn(["1", "2", "3", "4"]),
@@ -64,7 +64,7 @@ app.post(
   }
 );
 app.get(
-  "/deck/",
+  "/card/",
 
   upload.none(),
   async (request, response) => {
@@ -79,6 +79,39 @@ app.get(
     }
 
     return response.json({ data: result });
+  }
+);
+app.post(
+  "/card/",
+
+  upload.none(),
+  check("type_id", "Choose a card type").isIn(["1", "2", "3", "4"]),
+  check("year_id", "Choose a set").isIn(["1", "2", "3"]),
+  check("color_id", "Choose a card color").isIn(["1", "2", "3", "4", "5"]),
+  check("cmc", "Please enter a converted mana cost between 0 and 99.").isLength({ min: 1, max: 2 }),
+  check("cmc", "Please enter a converted mana cost that is not negative.").isInt({min: 1}),
+  check("card_name", "Please enter a valid card name of 3 to 20 characters.").isLength({
+    min: 3,
+    max: 20,
+  }),
+  async (request, response) => {
+    const errors = validationResult(request);
+    if (!errors.isEmpty()) {
+      return response.status(400).json({
+        message: "Request fields or files are invalid.",
+        errors: errors.array(),
+      });
+    }
+    try {
+      await sideboard.updateACard(request.body);
+    } catch (error) {
+      console.log(error);
+      return response
+        .status(500) //Error code when something goes wrong with the server
+        .json({ message: "Something went wrong with the server." });
+    }
+
+    response.status(200).json({ message: "Ok" });
   }
 );
 
