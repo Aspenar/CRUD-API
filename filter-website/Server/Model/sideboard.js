@@ -9,7 +9,7 @@ async function updateACard(parameters = {}) {
     WHERE id = ?`
     console.log(parameters);
     let queryParameters = [request.body.card_name, request.body.color_id, request.body.type_id, request.body.year_id, request.body.cmc, request.params.id];
-    return await connection.query(insertSql, queryParameters);
+    return await connection.query(updateSql, queryParameters);
 }
 module.exports = {
     updateACard
