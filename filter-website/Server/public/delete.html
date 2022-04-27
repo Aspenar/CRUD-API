@@ -23,3 +23,168 @@
       </div>
     </div>
     <hr />
+    <div class="row">
+      <div class="col-2">
+        <label for="card_name">Card Name</label>
+        <input type="text" id="card_name" name="card_name" />
+      </div>
+    </div>
+    <div class="row">
+      <div id="card_name-error" class="col-6 error-message">&nbsp;</div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <lable for="color">Color</lable>
+        <select id="color_id" name="color_id">
+          <option value="0"></option>
+          <option value="1">White</option>
+          <option value="2">Blue</option>
+          <option value="3">Black</option>
+          <option value="4">Red</option>
+          <option value="5">Green</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div id="color-error" class="col-6 error-message">&nbsp;</div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <lable for="type_id">Type</lable>
+        <select id="type_id" name="type_id">
+          <option value="0"></option>
+          <option value="1">Creature</option>
+          <option value="2">Enchantment</option>
+          <option value="3">Instant</option>
+          <option value="4">Artifact</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div id="type-error" class="col-6 error-message">&nbsp;</div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <lable for="year_id">Set</lable>
+        <select id="year_id" name="year_id">
+          <option value="0"></option>
+          <option value="1">Zendikar Rising</option>
+          <option value="2">Kaldheim</option>
+          <option value="3">Neon Dynasty</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div id="year-error" class="col-6 error-message">&nbsp;</div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <lable for="cmc">Converted Mana Cost</lable>
+        <input id="cmc" type="number" name="cmc" min="1" max="10" />
+      </div>
+    </div>
+    <div class="row">
+      <div id="cmc-error" class="col-6 error-message">&nbsp;</div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <button id="delete">Delete</button>
+      </div>
+    </div>
+
+    <!-- Send FETCH API request -->
+    <script>
+      const isEmpty = (obj) => Object.keys(obj).length === 0;
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      console.log(urlParams.get("id"));
+      function areYouSure(){
+        confirm("Are you sure you want to delete this?")
+      }
+
+      fetch("http://localhost/card/", { method: "GET" })
+        .then((response) => {
+          return new Promise((resolve) =>
+            response.json().then((json) =>
+              resolve({
+                status: response.status,
+                json,
+              })
+            )
+          );
+        })
+        .then(({ status, json }) => {
+          if (200 === status) {
+            console.log(json);
+            let data = json.data[urlParams.get("id") - 1];
+
+            document.getElementById("type_id").value = data.type_id;
+            document.getElementById("year_id").value = data.year_id;
+            document.getElementById("color_id").value = data.color_id;
+            document.getElementById("cmc").value = data.cmc;
+            document.getElementById("card_name").value = data.card_name;
+
+            console.log(data);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      console.log("here");
+
+      document.getElementById("delete").addEventListener("click", (event) => {
+        const formData = new FormData();
+        if (document.getElementById("type_id").value.length !== 0) {
+          formData.append("type_id", document.getElementById("type_id").value);
+        }
+        if (document.getElementById("year_id").value.length !== 0) {
+          formData.append("year_id", document.getElementById("year_id").value);
+        }
+        if (document.getElementById("color_id").value.length !== 0) {
+          formData.append("color_id", document.getElementById("color_id").value);
+        }
+        if (document.getElementById("cmc").value !== 0) {
+          formData.append("cmc", document.getElementById("cmc").value);
+        }
+        if (document.getElementById("card_name").value.length !== 0) {
+          formData.append("card_name", document.getElementById("card_name").value);
+        }
+
+        formData.append("id", urlParams.get("id"));
+        //Settings for FETCH API request
+        if(window.confirm('Are you sure your want to delete this?')){
+        let fetchSettings = {
+          method: "DELETE",
+          body: formData,
+        };
+
+        //Send FETCH API request
+        fetch("http://localhost/card/:id/", fetchSettings)
+          .then((response) => {
+            return new Promise((resolve) =>
+              response.json().then((json) =>
+                resolve({
+                  status: response.status,
+                  json,
+                })
+              )
+            );
+          })
+          //Logic to display errors on form
+          .then(({ status, json }) => {})
+          .catch((error) => {
+            console.error("Error:", error);
+            console.log(error);
+          });
+        return;
+      }});
+    
+    </script>
+  </body>
+</html>
+
+    </body>
