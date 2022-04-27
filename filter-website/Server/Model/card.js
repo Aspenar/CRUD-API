@@ -66,7 +66,7 @@ async function getCardsWithParams(parameters = {}) {
   return connection.query(selectSql, queryParameters);
 }
 async function viewCards() {
-  let viewSql = `SELECT * FROM card where id=?`;
+  let viewSql = `SELECT * FROM card`;
   return await connection.query(viewSql);
 }
 async function updateACard(parameters = {}) {
