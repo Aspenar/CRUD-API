@@ -24,11 +24,8 @@
     </div>
     <hr />
     <div class="row">
-      <div class="col-2">
+      <div class="col-12">
         <div id="editResponseLinks"></div>
-      </div>
-      <div class="col-2">
-        <div id="deleteResponseLinks"></div>
       </div>
     </div>
   </body>
@@ -52,11 +49,7 @@
           console.log(json);
           for (row of json.data) {
             document.getElementById("editResponseLinks").innerHTML +=
-              "<a href='update.html?id=" + row.id + "' >edit</a><br><br>";
-          }
-          for (row of json.data) {
-            document.getElementById("deleteResponseLinks").innerHTML +=
-              "<a href='delete.html?id=" + row.id + "' >delete</a><br><br>";
+              "<p>Card #" + row.id + "</p><a href='update.html?id=" + row.id + "' >edit</a> <a href='delete.html?id=" + row.id + "' >delete</a><br><br>";
           }
         }
       })
