@@ -38,12 +38,6 @@ async function getCardsWithParams(parameters = {}) {
     queryParameters.push("%" + cardName + "%");
   }
 
-  if (typeof parameters.level !== "undefined" && parseInt(parameters.level) !== 0) {
-    const classLevel = parseInt(parameters.level);
-    whereStatements.push("c.number BETWEEN ? AND ?");
-    queryParameters.push(classLevel);
-    queryParameters.push(classLevel + 99);
-  }
 
   if (parameters.sort) {
     const sort = parameters.sort;
@@ -72,7 +66,8 @@ async function getCardsWithParams(parameters = {}) {
   return connection.query(selectSql, queryParameters);
 }
 async function viewCards() {
-  let viewSql = `SELECT * FROM card WHERE id = ?`;
+  let viewSql = `SELECT * FROM card`;
+  
   return await connection.query(viewSql);
 }
 async function updateACard(parameters = {}) {
