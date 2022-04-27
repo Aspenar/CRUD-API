@@ -25,7 +25,10 @@
     <hr />
     <div class="row">
       <div class="col-2">
-        <div id="responseLinks"></div>
+        <div id="editResponseLinks"></div>
+      </div>
+      <div class="col-2">
+        <div id="deleteResponseLinks"></div>
       </div>
     </div>
   </body>
@@ -33,7 +36,7 @@
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     console.log(urlParams.get("id"));
-    fetch("http://localhost/card/", { method: "GET" })
+    fetch("http://localhost/card/:id/", { method: "GET" })
       .then((response) => {
         return new Promise((resolve) =>
           response.json().then((json) =>
@@ -48,8 +51,12 @@
         if (200 === status) {
           console.log(json);
           for (row of json.data) {
-            document.getElementById("responseLinks").innerHTML +=
-              "<a href='update.html?id=" + row.id + "' >card in collection</a><br><br>";
+            document.getElementById("editResponseLinks").innerHTML +=
+              "<a href='update.html?id=" + row.id + "' >edit</a><br><br>";
+          }
+          for (row of json.data) {
+            document.getElementById("deleteResponseLinks").innerHTML +=
+              "<a href='delete.html?id=" + row.id + "' >delete</a><br><br>";
           }
         }
       })

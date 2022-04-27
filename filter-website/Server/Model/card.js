@@ -67,6 +67,8 @@ async function getCardsWithParams(parameters = {}) {
 }
 async function viewCards() {
   let viewSql = `SELECT * FROM card`;
+  //console.log(parameters);
+  // let queryParameters = [parameters.id];
   return await connection.query(viewSql);
 }
 async function updateACard(parameters = {}) {
@@ -87,10 +89,17 @@ async function postNewCard(parameters = {}) {
   let queryParameters = [parameters.card_name, parameters.color_id, parameters.type_id, parameters.year_id, parameters.cmc];
   return await connection.query(insertSql, queryParameters);
 }
+async function removeACard(parameters = {}){
+  let deleteSql = 'DELETE FROM card where id = ?'
+  console.log(parameters);
+  let queryParameters = [parameters.id];
+  return await connection.query(deleteSql, queryParameters);
+}
 
 module.exports = {
   getCardsWithParams,
   viewCards,
   updateACard,
-  postNewCard
+  postNewCard,
+  removeACard
 };
