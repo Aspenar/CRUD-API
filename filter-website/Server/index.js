@@ -35,7 +35,7 @@ app.post(
   check("year_id", "Choose a set").isIn(["1", "2", "3"]),
   check("color_id", "Choose a card color").isIn(["1", "2", "3", "4", "5"]),
   check("cmc", "Please enter a converted mana cost between 0 and 99.").isLength({ min: 1, max: 2 }),
-  check("cmc", "Please enter a converted mana cost that is not negative.").isInt({min: 1}),
+  check("cmc", "Please enter a converted mana cost that is not negative.").isInt({ min: 1 }),
   check("card_name", "Please enter a valid card name of 3 to 20 characters.").isLength({
     min: 3,
     max: 20,
@@ -104,7 +104,7 @@ app.put(
   check("year_id", "Choose a set").isIn(["1", "2", "3"]),
   check("color_id", "Choose a card color").isIn(["1", "2", "3", "4", "5"]),
   check("cmc", "Please enter a converted mana cost between 0 and 99.").isLength({ min: 1, max: 2 }),
-  check("cmc", "Please enter a converted mana cost that is not negative.").isInt({min: 1}),
+  check("cmc", "Please enter a converted mana cost that is not negative.").isInt({ min: 1 }),
   check("card_name", "Please enter a valid card name of 3 to 20 characters.").isLength({
     min: 3,
     max: 20,
@@ -129,22 +129,16 @@ app.put(
     response.status(200).json({ message: "Ok" });
   }
 );
-app.delete(
-  "/card/:id/",
-  upload.none(),
-  async (request, response) => {
-    let result = {};
-    try {
-      await card.removeACard(request.body);
-    } catch (error) {
-      console.log(error);
-      return response
-      .status(500)
-      .json({ message: "Something went wrong with the server."});
-    }
-    response.status(200).json({ message: "Ok"});
+app.delete("/card/:id/", upload.none(), async (request, response) => {
+  let result = {};
+  try {
+    await card.removeACard(request.body);
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({ message: "Something went wrong with the server." });
   }
-);
+  response.status(200).json({ message: "Ok" });
+});
 
 app.listen(port, () => {
   console.log(`Application listening at http://localhost:${port}`);

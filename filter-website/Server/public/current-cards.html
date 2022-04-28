@@ -46,7 +46,13 @@
           console.log(json);
           for (row of json.data) {
             document.getElementById("editResponseLinks").innerHTML +=
-              "<p>Card #" + row.id + "</p><a href='update.html?id=" + row.id + "' >edit</a> <a href='delete.html?id=" + row.id + "' >delete</a><br><br>";
+              "<p>Card #" +
+              row.id +
+              "</p><a href='update.html?id=" +
+              row.id +
+              "' >edit</a> <a href='delete.html?id=" +
+              row.id +
+              "' >delete</a><br><br>";
           }
         }
       })

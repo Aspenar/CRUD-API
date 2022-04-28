@@ -29,7 +29,7 @@
     <div class="row">
       <div class="col-2">
         <label for="card_name">Card Name</label>
-        <input type="text" id="card_name" name="card_name">
+        <input type="text" id="card_name" name="card_name" />
       </div>
     </div>
     <div class="row">
@@ -87,7 +87,7 @@
     <div class="row">
       <div class="col-2">
         <lable for="cmc">Converted Mana Cost</lable>
-        <input id="cmc" type="number" name="cmc" min="1" max="10">
+        <input id="cmc" type="number" name="cmc" min="1" max="10" />
       </div>
     </div>
     <div class="row">
@@ -105,9 +105,8 @@
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       console.log(urlParams.get("id"));
-      const errorBanner = document.getElementById('invalidate-form');
+      const errorBanner = document.getElementById("invalidate-form");
       errorBanner.hidden = true;
-
 
       fetch(`http://localhost/card/${urlParams.get("id")}/`, { method: "GET" })
         .then((response) => {
@@ -178,20 +177,20 @@
           })
           //Logic to display errors on form
           .then(({ status, json }) => {
-            const errorMessages = document.getElementsByClassName('error-message');
-                  errorBanner.hidden = true;
-                  for (htmlElement of errorMessages) {
-                      htmlElement.innerHTML = '&nbsp;';
-                  }
-                  if (status === 400) {
-                      errorBanner.innerText = 'Form has errors. Please correct them and resubmit.';
-                      errorBanner.hidden = false;
-                      for (error of json.errors) {
-                          const errorId = error.param + '-error';
-                          console.log(errorId);
-                          document.getElementById(errorId).innerHTML = error.msg
-                      }
-                  }
+            const errorMessages = document.getElementsByClassName("error-message");
+            errorBanner.hidden = true;
+            for (htmlElement of errorMessages) {
+              htmlElement.innerHTML = "&nbsp;";
+            }
+            if (status === 400) {
+              errorBanner.innerText = "Form has errors. Please correct them and resubmit.";
+              errorBanner.hidden = false;
+              for (error of json.errors) {
+                const errorId = error.param + "-error";
+                console.log(errorId);
+                document.getElementById(errorId).innerHTML = error.msg;
+              }
+            }
           })
           .catch((error) => {
             console.error("Error:", error);

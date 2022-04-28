@@ -38,7 +38,6 @@ async function getCardsWithParams(parameters = {}) {
     queryParameters.push("%" + cardName + "%");
   }
 
-
   if (parameters.sort) {
     const sort = parameters.sort;
     if (sort === "ASC") {
@@ -84,19 +83,32 @@ async function updateACard(parameters = {}) {
   type_id = ?,
   year_id = ?,
   cmc = ?
-  WHERE id = ?`
+  WHERE id = ?`;
   console.log(parameters);
-  let queryParameters = [parameters.card_name, parameters.color_id, parameters.type_id, parameters.year_id, parameters.cmc, parameters.id];
+  let queryParameters = [
+    parameters.card_name,
+    parameters.color_id,
+    parameters.type_id,
+    parameters.year_id,
+    parameters.cmc,
+    parameters.id,
+  ];
   return await connection.query(updateSql, queryParameters);
 }
 async function postNewCard(parameters = {}) {
-  let insertSql = `INSERT INTO card (card_name, color_id, type_id, year_id, cmc) VALUES (?,?,?,?,?)`
+  let insertSql = `INSERT INTO card (card_name, color_id, type_id, year_id, cmc) VALUES (?,?,?,?,?)`;
   console.log(parameters);
-  let queryParameters = [parameters.card_name, parameters.color_id, parameters.type_id, parameters.year_id, parameters.cmc];
+  let queryParameters = [
+    parameters.card_name,
+    parameters.color_id,
+    parameters.type_id,
+    parameters.year_id,
+    parameters.cmc,
+  ];
   return await connection.query(insertSql, queryParameters);
 }
-async function removeACard(parameters = {}){
-  let deleteSql = 'DELETE FROM card where id = ?'
+async function removeACard(parameters = {}) {
+  let deleteSql = "DELETE FROM card where id = ?";
   console.log(parameters);
   let queryParameters = [parameters.id];
   return await connection.query(deleteSql, queryParameters);
@@ -108,5 +120,5 @@ module.exports = {
   updateACard,
   postNewCard,
   removeACard,
-  viewCard
+  viewCard,
 };
