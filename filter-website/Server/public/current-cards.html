@@ -30,7 +30,7 @@
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     console.log(urlParams.get("id"));
-    fetch("http://localhost/card/:id/", { method: "GET" })
+    fetch("http://localhost/card/all/", { method: "GET" })
       .then((response) => {
         return new Promise((resolve) =>
           response.json().then((json) =>

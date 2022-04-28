@@ -106,7 +106,7 @@
         confirm("Are you sure you want to delete this?")
       }
 
-      fetch("http://localhost/card/:id/", { method: "GET" })
+      fetch(`http://localhost/card/${urlParams.get("id")}/`, { method: "GET" })
         .then((response) => {
           return new Promise((resolve) =>
             response.json().then((json) =>
@@ -120,7 +120,7 @@
         .then(({ status, json }) => {
           if (200 === status) {
             console.log(json);
-            let data = json.data[urlParams.get("id") - 1];
+            let data = json.data[0];
 
             document.getElementById("type_id").value = data.type_id;
             document.getElementById("year_id").value = data.year_id;

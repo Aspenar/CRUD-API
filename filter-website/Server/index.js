@@ -61,13 +61,31 @@ app.post(
   }
 );
 app.get(
+  "/card/all/",
+
+  upload.none(),
+  async (request, response) => {
+    let result = {};
+    try {
+      result = await card.viewCards(request.params);
+    } catch (error) {
+      console.log(error);
+      return response
+        .status(500) //Error code when something goes wrong with the server
+        .json({ message: "Something went wrong with the server." });
+    }
+
+    return response.json({ data: result });
+  }
+);
+app.get(
   "/card/:id/",
 
   upload.none(),
   async (request, response) => {
     let result = {};
     try {
-      result = await card.viewCards(request.query);
+      result = await card.viewCard(request.params);
     } catch (error) {
       console.log(error);
       return response

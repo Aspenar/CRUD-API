@@ -71,6 +71,12 @@ async function viewCards() {
   // let queryParameters = [parameters.id];
   return await connection.query(viewSql);
 }
+async function viewCard(parameters = {}) {
+  let viewSql = `SELECT * FROM card WHERE id = ?`;
+  //console.log(parameters);
+  let queryParameters = [parameters.id];
+  return await connection.query(viewSql, queryParameters);
+}
 async function updateACard(parameters = {}) {
   let updateSql = `Update card 
   SET card_name = ?,
@@ -101,5 +107,6 @@ module.exports = {
   viewCards,
   updateACard,
   postNewCard,
-  removeACard
+  removeACard,
+  viewCard
 };
