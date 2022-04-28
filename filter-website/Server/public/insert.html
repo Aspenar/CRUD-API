@@ -20,7 +20,8 @@
       </div>
     </div>
     <div class="row">
-      <div id="invalidate-form" class="col-12, alert-error"></div>
+      <div id="invalidate-form" class="col-6, alert-error"></div>
+      <div id="successBanner" class="col-6, alert-success"></div>
     </div>
     <hr />
     <div class="row">
@@ -99,6 +100,8 @@
       const errorBanner = document.getElementById("invalidate-form");
       errorBanner.hidden = true;
       const isEmpty = (obj) => object.keys(obj).length === 0;
+      const successBanner = document.getElementById("successBanner");
+      successBanner.hidden = true;
 
       document.getElementById("submit").addEventListener("click", (event) => {
         const formData = new FormData();
@@ -140,6 +143,7 @@
           .then(({ status, json }) => {
             const errorMessages = document.getElementsByClassName("error-message");
             errorBanner.hidden = true;
+
             for (htmlElement of errorMessages) {
               htmlElement.innerHTML = "&nbsp;";
             }
@@ -151,6 +155,10 @@
                 console.log(errorId);
                 document.getElementById(errorId).innerHTML = error.msg;
               }
+            }
+            if (status === 200) {
+              successBanner.innerText = "Your request has processed properly";
+              successBanner.hidden = false;
             }
           })
           .catch((error) => {

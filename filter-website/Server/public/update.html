@@ -23,7 +23,8 @@
       </div>
     </div>
     <div class="row">
-      <div id="invalidate-form" class="col-12, alert-error"></div>
+      <div id="invalidate-form" class="col-6, alert-error"></div>
+      <div id="successBanner" class="col-6, alert-success"></div>
     </div>
     <hr />
     <div class="row">
@@ -107,6 +108,8 @@
       console.log(urlParams.get("id"));
       const errorBanner = document.getElementById("invalidate-form");
       errorBanner.hidden = true;
+      const successBanner = document.getElementById("successBanner");
+      successBanner.hidden = true;
 
       fetch(`http://localhost/card/${urlParams.get("id")}/`, { method: "GET" })
         .then((response) => {
@@ -190,6 +193,10 @@
                 console.log(errorId);
                 document.getElementById(errorId).innerHTML = error.msg;
               }
+            }
+            if (status === 200) {
+              successBanner.innerText = "Your request has processed properly";
+              successBanner.hidden = false;
             }
           })
           .catch((error) => {
