@@ -70,6 +70,7 @@ async function viewCards() {
   // let queryParameters = [parameters.id];
   return await connection.query(viewSql);
 }
+//seems to be doing the same thing as getCardsWithParams but for some reason the afore mentioned function returns id's replaced with the year_id column values
 async function viewCard(parameters = {}) {
   let viewSql = `SELECT * FROM card WHERE id = ?`;
   //console.log(parameters);
