@@ -91,10 +91,11 @@ th {
 body {
   background: #272727;
   font-family: "Montserrat", sans-serif;
+  color: white;
 }
 
 .navMenu {
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
@@ -108,7 +109,7 @@ body {
   text-transform: uppercase;
   font-weight: 500;
   display: inline-block;
-  width: 80px;
+  width: 140px;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
@@ -139,7 +140,7 @@ body {
 
 .navMenu a:nth-child(2):hover ~ .dot {
   -webkit-transform: translateX(110px);
-  transform: translateX(110px);
+  transform: translateX(150px);
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   opacity: 1;
