@@ -2,7 +2,7 @@ const connection = require("./connection");
 //Part of the Model in MVC (model view controller) the view is a JSON.
 async function getCardsWithParams(parameters = {}) {
   let selectSql = `SELECT 
-  * 
+  *
   FROM card AS c
   INNER JOIN color o ON c.color_id = o.id
   INNER JOIN type t ON c.type_id = t.id
@@ -109,7 +109,7 @@ async function postNewCard(parameters = {}) {
   return await connection.query(insertSql, queryParameters);
 }
 async function removeACard(parameters = {}) {
-  let deleteSql = "DELETE FROM card where id = ?";
+  let deleteSql = "DELETE FROM card WHERE id = ?";
   console.log(parameters);
   let queryParameters = [parameters.id];
   return await connection.query(deleteSql, queryParameters);

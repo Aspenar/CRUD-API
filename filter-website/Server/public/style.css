@@ -167,13 +167,17 @@ h1 {
   font: bold;
 }
 
-.successBanner {
-  background-color: forestgreen;
+.alert-success {
+  position: relative;
+  padding: 1rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  color: forestgreen;
+  background-color: lightgreen;
+  border-color: lightgreen;
 }
-.errorBanner {
-  background-color: red;
 
-}
 .center {
   margin: auto;
   width: 50%;
@@ -185,4 +189,18 @@ button{
 }
 #cards{
   background-color: black;
+}
+.alert-error {
+  position: relative;
+  padding: 1rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+}
+.editResponseLinks a{
+  background-color: aquamarine;
+  border: 1px;
 }
