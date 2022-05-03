@@ -89,7 +89,7 @@ th {
 }
 
 body {
-  background: #272727;
+  background-image: url('https://i.imgur.com/yk8rgjR.png');
   font-family: "Montserrat", sans-serif;
   color: white;
 }
@@ -160,4 +160,29 @@ body {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   opacity: 1;
+}
+
+h1 {
+  color: burlywood;
+  font: bold;
+}
+
+.successBanner {
+  background-color: forestgreen;
+}
+.errorBanner {
+  background-color: red;
+
+}
+.center {
+  margin: auto;
+  width: 50%;
+  border: 3px transparent;
+  padding: 10px;
+}
+button{
+  background-color: skyblue;
+}
+#cards{
+  background-color: black;
 }
